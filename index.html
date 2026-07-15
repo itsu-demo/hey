@@ -56,17 +56,5 @@
         Sorry, your browser doesn't support embedded videos.
     </video>
 
-    <button id="unmute-btn" type="button">🔊 Unmute</button>
-
-    <script>
-        var video = document.getElementById('video');
-        var unmuteBtn = document.getElementById('unmute-btn');
-
-        unmuteBtn.addEventListener('click', function () {
-            video.muted = false;
-            video.play().catch(function () {});
-            unmuteBtn.classList.add('hidden');
-        });
-    </script>
 </body>
 </html>
