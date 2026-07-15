@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>hey</title>
+    <title>Video</title>
     <style>
         html, body {
             margin: 0;
@@ -25,20 +25,29 @@
     </style>
 </head>
 <body>
-    <video id="video" autoplay muted loop playsinline>
-        <source src="assets/itsudemo.mp4" type="video/mp4">
+    <video id="video" autoplay muted loop playsinline controls>
+        <source src="video.mp4" type="video/mp4">
         Sorry, your browser doesn't support embedded videos.
     </video>
 
     <script>
         var video = document.getElementById('video');
 
-        document.addEventListener('click', function (e) {
-            e.preventDefault();
+        var events = ['click', 'keydown'];
+
+        function unmute(e) {
+            if (e.preventDefault) e.preventDefault();
             video.currentTime = 0;
             video.muted = false;
             video.play().catch(function () {});
-        }, { once: true });
+            events.forEach(function (evt) {
+                document.removeEventListener(evt, unmute);
+            });
+        }
+
+        events.forEach(function (evt) {
+            document.addEventListener(evt, unmute, { once: true });
+        });
     </script>
 </body>
 </html>
